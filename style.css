@@ -1,0 +1,179 @@
+/* Reset Básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0a0a0b; /* Preto fosco */
+  color: #d1d1d1;
+  font-family: 'Inter', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  /* Grade sutil estilo radar no fundo */
+  background-image: linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Barra Superior Estilo OS Retro */
+.top-bar {
+  height: 30px;
+  background-color: #141416;
+  border-bottom: 1px solid #2a2a2e;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.bar-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #666;
+}
+
+.desktop {
+  padding: 50px 40px;
+  position: relative;
+  height: calc(100% - 30px);
+}
+
+/* Estilo do Ícone de Atalho */
+.icon {
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.icon-box {
+  width: 70px;
+  height: 70px;
+  background-color: #141416;
+  border: 1px solid #2a2a2e;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+/* O Brilho Azul Batarang ao passar o mouse */
+.icon:hover .icon-box {
+  border-color: #00f0ff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.icon-label {
+  margin-top: 10px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #999;
+}
+
+/* Estilo da Janela */
+.window {
+  width: 380px;
+  background-color: #121214;
+  border: 2px solid #2a2a2e;
+  position: absolute;
+  top: 100px;
+  left: 120px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
+  display: none; /* Inicia escondida até clicar com o JS */
+  overflow: hidden;
+}
+
+.window-header {
+  background-color: #1a1a1d;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #2a2a2e;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close { background-color: #ff5f56; }
+.minimize { background-color: #ffbd2e; }
+.maximize { background-color: #27c93f; }
+
+.window-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffbf00; /* Amarelo Batman */
+  margin-left: auto;
+}
+
+.window-body {
+  padding: 26px;
+}
+
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #00f0ff; /* Azul Elétrico */
+  background-color: rgba(0, 240, 255, 0.1);
+  padding: 5px 10px;
+  display: inline-block;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+h2 {
+  font-size: 26px;
+  margin-top: 15px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #f0f0f0;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #666;
+  margin-bottom: 18px;
+}
+
+.bio {
+  font-size: 14px;
+  color: #b0b0b0;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  background-color: #141416;
+  color: #00f0ff;
+  border: 1px solid #00f0ff;
+  text-decoration: none;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 12px 0;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #00f0ff;
+  color: #141416;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+}
