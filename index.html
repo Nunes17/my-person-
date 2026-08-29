@@ -3,94 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PN // SYSTEM ACCESS</title>
+  <title>NVNES // SYSTEM ACCESS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Barra Superior OS -->
-  <div class="top-bar">
-    <span class="bar-title">PN_SYS // GOTHAM_FILE_DECK</span>
-    <span class="bar-status">[ DETECTIVE MODE ACTIVE ]</span>
+  <!-- TELA INICIAL BLOQUEANTE (MENSAGEM DE ENTRADA) -->
+  <div id="intro-overlay" class="overlay">
+    <div class="gotham-box intro-box">
+      <div class="box-header">
+        <span class="box-title">SYSTEM_INIT // WELCOME.TXT</span>
+        <button class="close-btn" onclick="closeIntro()">[X]</button>
+      </div>
+      <div class="box-body terminal-text">
+        <span class="prompt">></span>
+        <span id="typed-text"></span><span class="cursor">|</span>
+      </div>
+      <div class="box-footer">
+        <button id="close-intro-btn" class="gotham-btn" onclick="closeIntro()" style="display: none;">[ ACESSAR PAINEL ]</button>
+      </div>
+    </div>
   </div>
 
-  <main class="container">
-    
-    <!-- MENSAGEM DE ENTRADA (MUSEU/TERMINAL DIGITADO) -->
-    <div class="terminal-intro">
-      <span class="prompt">></span>
-      <span id="typed-text"></span><span class="cursor">|</span>
-    </div>
+  <!-- BARRA DE STATUS SUPERIOR GOTHAM -->
+  <header class="system-bar">
+    <div class="brand-id">NVNES_OS // 011_SP</div>
+    <div class="system-status"><span class="blink-dot">●</span> CURSOR LIBERADO</div>
+  </header>
 
-    <!-- JANELA PRINCIPAL INTERATIVA COM ABAS -->
-    <div class="main-window">
-      
-      <!-- Cabeçalho com Abas -->
-      <div class="window-header">
-        <div class="window-controls">
-          <span class="dot close"></span>
-          <span class="dot minimize"></span>
-          <span class="dot maximize"></span>
-        </div>
-        
-        <!-- Abas de Navegação -->
-        <div class="tabs">
-          <button class="tab-btn active" onclick="switchTab('tab-profile', this)">/PROFILE</button>
-          <button class="tab-btn" onclick="switchTab('tab-photos', this)">/SP_GALLERY</button>
-          <button class="tab-btn" onclick="switchTab('tab-music', this)">/SOUND</button>
-          <button class="tab-btn" onclick="switchTab('tab-faith', this)">/FAITH</button>
-        </div>
+  <!-- ÁREA DE TRABALHO COM ÍCONES ORGANIZADOS -->
+  <main class="desktop">
+
+    <div class="icons-container">
+      <div class="icon-card" onclick="openWindow('win-profile')">
+        <div class="icon-symbol">[ID]</div>
+        <span class="icon-title">_profile.sys</span>
       </div>
 
-      <!-- Conteúdo das Abas -->
-      <div class="window-body">
+      <div class="icon-card" onclick="openWindow('win-gallery')">
+        <div class="icon-symbol">[SP]</div>
+        <span class="icon-title">_gallery.jpg</span>
+      </div>
 
-        <!-- ABA 1: PERFIL -->
-        <div id="tab-profile" class="tab-content active">
-          <span class="badge">SUBJECT // Nickollas Nunes </span>
-          <h2>Quem é Nvnes??</h2>
-          <p class="subtitle">São Paulo — BR | 011</p>
-          <p class="bio">Começando na engenharia de software, desenvolvendo ideias na louca cidade de são paulo.
-          De Brasília pro Mundo FR</p>
-          <a href="https://instagram.com" target="_blank" class="btn">Acessar Instagram ↗</a>
-        </div>
+      <div class="icon-card" onclick="openWindow('win-sound')">
+        <div class="icon-symbol">[SND]</div>
+        <span class="icon-title">_sound.wav</span>
+      </div>
 
-        <!-- ABA 2: SLIDE DE FOTOS (GALERIA) -->
-        <div id="tab-photos" class="tab-content">
-          <div class="slider-container">
-            <div class="slide active">
-              <img src="foto1.jpg" alt="São Paulo 1" class="slide-img" id="img-target">
-              <p class="img-caption" id="caption-target">011 — Noite em São Paulo</p>
-            </div>
-            <div class="slider-controls">
-              <button class="slide-btn" onclick="prevSlide()">❮ Anterior</button>
-              <button class="slide-btn" onclick="nextSlide()">Próxima ❯</button>
-            </div>
+      <div class="icon-card" onclick="openWindow('win-faith')">
+        <div class="icon-symbol">[FTH]</div>
+        <span class="icon-title">_faith.dat</span>
+      </div>
+    </div>
+
+    <!-- JANELA 1: QUEM É NVNES -->
+    <div class="gotham-box content-box" id="win-profile">
+      <div class="box-header">
+        <span class="box-title">ID // QUEM É NVNES</span>
+        <button class="close-btn" onclick="closeWindow('win-profile')">[X]</button>
+      </div>
+      <div class="box-body">
+        <span class="tag">SUBJECT //NICKOLLAS NUNES </span>
+        <h2>Quem é Nvnes??</h2>
+        <p class="sub">São Paulo — BR | 011</p>
+        <p class="text">Começando engenharia de software,Mais um futuro vencedor da zona leste de Sp, Deus acima de todas as coisas, de Brasília pro mundo, Venca comigo ou me veja Vencendo. </p>
+        <a href="https://instagram.com" target="_blank" class="gotham-btn link-full">Acessar Instagram ↗</a>
+      </div>
+    </div>
+
+    <!-- JANELA 2: SP GALLERY -->
+    <div class="gotham-box content-box" id="win-gallery">
+      <div class="box-header">
+        <span class="box-title">GALERIA // SÃO PAULO 011</span>
+        <button class="close-btn" onclick="closeWindow('win-gallery')">[X]</button>
+      </div>
+      <div class="box-body">
+        <div class="gallery-wrapper">
+          <img src="https://images.unsplash.com/photo-1578637387939-43c525550085?w=600" id="img-target" class="gallery-frame" alt="SP Photo">
+          <p id="caption-target" class="caption-text">011 — Cidade de Pedra & Noite</p>
+          <div class="gallery-controls">
+            <button onclick="prevSlide()" class="gotham-btn small">❮ Ant</button>
+            <button onclick="nextSlide()" class="gotham-btn small">Próx ❯</button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- ABA 3: MÚSICA -->
-        <div id="tab-music" class="tab-content">
-          <span class="badge">AUDIO FREQUENCY</span>
-          <h3 class="track-title">Gotham Nights Vibe</h3>
-          <p class="track-artist">Midnight Session</p>
-          <div class="audio-player-box">
-            <p class="player-status">♫ Frequência Sonora Selecionada</p>
-          </div>
-        </div>
+    <!-- JANELA 3: SOUND -->
+    <div class="gotham-box content-box" id="win-sound">
+      <div class="box-header">
+        <span class="box-title">AUDIO // FREQUENCY</span>
+        <button class="close-btn" onclick="closeWindow('win-sound')">[X]</button>
+      </div>
+      <div class="box-body">
+        <span class="tag">SOUNDTRACK</span>
+        <h3>Gotham Nights Vibe</h3>
+        <p class="text">Sessões noturnas e referências sonoras do projeto.</p>
+      </div>
+    </div>
 
-        <!-- ABA 4: FÉ / VERSÍCULO -->
-        <div id="tab-faith" class="tab-content">
-          <span class="badge">CORE VALUES</span>
-          <blockquote class="verse-text">
-            "O Senhor é a minha luz e a minha salvação; de quem terei medo?"
-          </blockquote>
-          <span class="verse-ref">— Salmos 27:1</span>
-        </div>
-
+    <!-- JANELA 4: FAITH -->
+    <div class="gotham-box content-box" id="win-faith">
+      <div class="box-header">
+        <span class="box-title">FAITH // PRINCIPLES</span>
+        <button class="close-btn" onclick="closeWindow('win-faith')">[X]</button>
+      </div>
+      <div class="box-body">
+        <span class="tag">VALORES</span>
+        <blockquote class="verse-quote">
+          "O Senhor é a minha luz e a minha salvação; de quem terei medo?"
+        </blockquote>
+        <span class="verse-ref">— Salmos 27:1</span>
       </div>
     </div>
 
