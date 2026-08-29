@@ -1,45 +1,98 @@
-// Abrir a página cheia do menu selecionado
-function openPage(pageId) {
-  // Esconde todas as páginas ativas
-  const pages = document.querySelectorAll('.full-page');
-  pages.forEach(p => p.style.display = 'none');
+// Frase de Introdução da Tela de Entrada
+const textToType = "Por trás de cada pessoa existe um universo que não aparece na superfície. Este é um pouco do MEU..";
+let index = 0;
 
-  // Exibe a página escolhida
-  const targetPage = document.getElementById(pageId);
-  if (targetPage) {
-    targetPage.style.display = 'block';
-  }
-
-  // Se a página aberta for a FAITH, dispara a narração em voz
-  if (pageId === 'page-faith') {
-    speakVerse();
+function typeWriter() {
+  if (index < textToType.length) {
+    document.getElementById("typed-text").innerHTML += textToType.charAt(index);
+    index++;
+    setTimeout(typeWriter, 35);
+  } else {
+    document.getElementById("close-intro-btn").style.display = "inline-block";
   }
 }
 
-// Voltar para o menu principal de seleção
-function closePages() {
-  const pages = document.querySelectorAll('.full-page');
-  pages.forEach(p => p.style.display = 'none');
+// Inicia a digitação e a voz grave de entrada
+window.onload = () => {
+  typeWriter();
+  speakText(textToType);
+};
 
-  // Cancela qualquer narração de áudio que estiver rolando
+// Fechar tela de introdução
+function closeIntro() {
+  document.getElementById("intro-overlay").style.display = "none";
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
   }
 }
 
-// Narração em áudio para o Salmo 27:1
-function speakVerse() {
+// Controle de abertura de páginas em tela cheia
+function openPage(pageId) {
+  const pages = document.querySelectorAll('.full-page');
+  pages.forEach(p => p.style.display = 'none');
+
+  const targetPage = document.getElementById(pageId);
+  if (targetPage) {
+    targetPage.style.display = 'block';
+  }
+
+  // Narração de voz na aba FAITH
+  if (pageId === 'page-faith') {
+    speakVerse();
+  }
+}
+
+function closePages() {
+  const pages = document.querySelectorAll('.full-page');
+  pages.forEach(p => p.style.display = 'none');
+
   if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel(); // Para narrações anteriores
-    const text = "O Senhor é a minha luz e a minha salvação; de quem terei medo?";
+    window.speechSynthesis.cancel();
+  }
+}
+
+// FUNÇÃO DE VOZ ESTILO BATMAN (GRAVE, PULLDOWN & PAUSADA)
+function speakText(text) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel(); // Para falas anteriores
+    
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'pt-BR';
-    utterance.rate = 0.9; // Velocidade da fala um pouco mais firme e pausada
+    
+    // Configurações para efeito de voz do Batman:
+    utterance.pitch = 0.5; // Tom ultra grave (pesado)
+    utterance.rate = 0.8;  // Velocidade lenta e firme
+
+    // Tenta selecionar uma voz masculina do sistema
+    const voices = window.speechSynthesis.getVoices();
+    const maleVoice = voices.find(voice => 
+      voice.lang.includes('pt') && 
+      (voice.name.toLowerCase().includes('male') || 
+       voice.name.toLowerCase().includes('ricardo') || 
+       voice.name.toLowerCase().includes('daniel') ||
+       voice.name.toLowerCase().includes('homem'))
+    );
+
+    if (maleVoice) {
+      utterance.voice = maleVoice;
+    }
+
     window.speechSynthesis.speak(utterance);
   }
 }
 
-// Controle da Galeria de Fotos SP
+function speakVerse() {
+  speakText("O Senhor é a minha luz e a minha salvação; de quem terei medo?");
+}
+
+// Garantir que as vozes do sistema sejam carregadas antes do clique
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+  };
+}
+
+// Controle de Fotos SP Gallery
 const photos = [
   { url: "https://images.unsplash.com/photo-1578637387939-43c525550085?w=800", caption: "011 — Cidade de Pedra & Noite" },
   { url: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800", caption: "011 — Arquitetura Noturna" },
