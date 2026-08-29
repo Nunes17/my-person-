@@ -3,65 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedro Neves | Personal Space</title>
-  
-  <!-- Fontes do Google (JetBrains Mono para o estilo tech e Inter para a leitura) -->
+  <title>PN // SYSTEM ACCESS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-  
-  <!-- Conexão com o arquivo de estilo (vamos criar depois) -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Barra Superior do Sistema -->
+  <!-- Barra Superior OS -->
   <div class="top-bar">
-    <span class="bar-title">PN_OS // DETECTIVE 1.0</span>
+    <span class="bar-title">PN_SYS // GOTHAM_FILE_DECK</span>
+    <span class="bar-status">[ DETECTIVE MODE ACTIVE ]</span>
   </div>
 
-  <!-- Área de Trabalho (Desktop) -->
-  <div class="desktop">
+  <main class="container">
     
-    <!-- ÍCONE 1: Atalho para o Perfil -->
-    <div class="icon" onclick="openWindow('window-profile')">
-      <div class="icon-box">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#00f0ff" viewBox="0 0 256 256">
-          <path d="M228.69,128c-6.83-8.8-17.72-17.7-32.31-26.43A118.81,118.81,0,0,0,165,85.66c-1.39-.41-2.77-.82-4.14-1.2l-3.32-.9c-13.62-3.66-31.5-6.61-48.54-6.61s-34.92,2.95-48.54,6.61c-.56.15-1.11.3-1.66.45L55.48,85c-.46.12-.91.25-1.37.38a118.67,118.67,0,0,0-31.33,15.91C8.19,110.32-2.7,119.22-9.53,128a11.13,111.13,0,0,0,0,16c6.83,8.8,17.72,17.7,32.31,26.43a118.66,118.66,0,0,0,31.33,15.91l3.32.91c1.37.37,2.75.76,4.14,1.14l1.1.29.56.16c13.62,3.66,31.5,6.61,48.54,6.61s34.92-2.95,48.54-6.61l.56-.16,1.1-.29c1.39-.38,2.77-.77,4.14-1.14l3.32-.91a118.81,118.81,0,0,0,31.33-15.91C247.81,145.68,258.7,136.78,265.53,128Zm-238.22,0C6,118.41,20,107,38,98.6a102.77,102.77,0,0,1,27.11-13.78c1.33-.35,2.65-.69,4-1s2.61-.63,3.9-.91c12.23-3.26,28.67-5.91,44-5.91s31.77,2.65,44,5.91c1.3.28,2.6.57,3.9.91s2.67.65,4,1A102.82,102.82,0,0,1,218,98.6C236,107,250,118.41,256.53,128s-14,21.59-32,30C218.15,164.72,204.66,171.19,191,175.75c-1.33.35-2.65.69-4,1s-2.61.63-3.9.91C170.87,180.93,154.43,183.58,139.1,183.58s-31.77-2.65-44-5.91c-1.3-.28-2.6-.57-3.9-.91s-2.67-.65-4-1A102.82,102.82,0,0,1,38,157.35l-3.32-.9C20.66,148,6.59,136.78-9.53,128ZM128,152c-13.25,0-24-10.75-24-24s10.75-24,24-24,24,10.75,24,24S141.25,152,128,152Zm0-32a8,8,0,1,0,8,8A8,8,0,0,0,128,120Z"/>
-        </svg>
-      </div>
-      <p class="icon-label">about.sys</p>
+    <!-- MENSAGEM DE ENTRADA (MUSEU/TERMINAL DIGITADO) -->
+    <div class="terminal-intro">
+      <span class="prompt">></span>
+      <span id="typed-text"></span><span class="cursor">|</span>
     </div>
 
-    <!-- JANELA 1: Perfil / Sobre mim -->
-    <div class="window" id="window-profile">
+    <!-- JANELA PRINCIPAL INTERATIVA COM ABAS -->
+    <div class="main-window">
+      
+      <!-- Cabeçalho com Abas -->
       <div class="window-header">
         <div class="window-controls">
-          <span class="dot close" onclick="closeWindow('window-profile')"></span>
+          <span class="dot close"></span>
           <span class="dot minimize"></span>
           <span class="dot maximize"></span>
         </div>
-        <div class="window-title">PROFILE // PN_01</div>
+        
+        <!-- Abas de Navegação -->
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('tab-profile', this)">/PROFILE</button>
+          <button class="tab-btn" onclick="switchTab('tab-photos', this)">/SP_GALLERY</button>
+          <button class="tab-btn" onclick="switchTab('tab-music', this)">/SOUND</button>
+          <button class="tab-btn" onclick="switchTab('tab-faith', this)">/FAITH</button>
+        </div>
       </div>
 
+      <!-- Conteúdo das Abas -->
       <div class="window-body">
-        <span class="badge">STREET / MINIMAL</span>
-        <h2>Pedro Neves</h2>
-        <p class="subtitle">São Paulo — BR</p>
-        
-        <p class="bio">
-          Criando projetos, estudando desenvolvimento e registrando referências urbanas e pessoais.
-        </p>
 
-        <div class="links-group">
-          <a href="https://instagram.com/seuusuario" target="_blank" class="btn">Instagram ↗</a>
+        <!-- ABA 1: PERFIL -->
+        <div id="tab-profile" class="tab-content active">
+          <span class="badge">SUBJECT // Nickollas Nunes </span>
+          <h2>Quem é Nvnes??</h2>
+          <p class="subtitle">São Paulo — BR | 011</p>
+          <p class="bio">Começando na engenharia de software, desenvolvendo ideias na louca cidade de são paulo.
+          De Brasília pro Mundo FR</p>
+          <a href="https://instagram.com" target="_blank" class="btn">Acessar Instagram ↗</a>
         </div>
+
+        <!-- ABA 2: SLIDE DE FOTOS (GALERIA) -->
+        <div id="tab-photos" class="tab-content">
+          <div class="slider-container">
+            <div class="slide active">
+              <img src="foto1.jpg" alt="São Paulo 1" class="slide-img" id="img-target">
+              <p class="img-caption" id="caption-target">011 — Noite em São Paulo</p>
+            </div>
+            <div class="slider-controls">
+              <button class="slide-btn" onclick="prevSlide()">❮ Anterior</button>
+              <button class="slide-btn" onclick="nextSlide()">Próxima ❯</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA 3: MÚSICA -->
+        <div id="tab-music" class="tab-content">
+          <span class="badge">AUDIO FREQUENCY</span>
+          <h3 class="track-title">Gotham Nights Vibe</h3>
+          <p class="track-artist">Midnight Session</p>
+          <div class="audio-player-box">
+            <p class="player-status">♫ Frequência Sonora Selecionada</p>
+          </div>
+        </div>
+
+        <!-- ABA 4: FÉ / VERSÍCULO -->
+        <div id="tab-faith" class="tab-content">
+          <span class="badge">CORE VALUES</span>
+          <blockquote class="verse-text">
+            "O Senhor é a minha luz e a minha salvação; de quem terei medo?"
+          </blockquote>
+          <span class="verse-ref">— Salmos 27:1</span>
+        </div>
+
       </div>
     </div>
 
-  </div>
+  </main>
 
-  <!-- Conexão com o arquivo de interatividade (vamos criar por último) -->
   <script src="script.js"></script>
 </body>
 </html>
