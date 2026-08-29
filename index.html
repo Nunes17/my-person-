@@ -11,6 +11,23 @@
 </head>
 <body>
 
+  <!-- TELA INICIAL BLOQUEANTE (WELCOME / INTRODUÇÃO) -->
+  <div id="intro-overlay" class="overlay">
+    <div class="intro-box">
+      <div class="box-header">
+        <span class="box-title">SYSTEM_INIT // WELCOME.TXT</span>
+        <button class="close-btn" onclick="closeIntro()">[X]</button>
+      </div>
+      <div class="box-body terminal-text">
+        <span class="prompt">></span>
+        <span id="typed-text"></span><span class="cursor">|</span>
+      </div>
+      <div class="box-footer">
+        <button id="close-intro-btn" class="bat-btn" onclick="closeIntro()" style="display: none;">[ ACESSAR PAINEL ]</button>
+      </div>
+    </div>
+  </div>
+
   <!-- BARRA SUPERIOR DE SISTEMA -->
   <header class="system-bar">
     <div class="brand-id">NVNES // OPERATIVE_SELECT</div>
@@ -20,12 +37,14 @@
   <!-- LOGO DO BATMAN NO FUNDO -->
   <div class="bat-wallpaper"></div>
 
-  <!-- MENU PRINCIPAL: SELEÇÃO DE CARDS EM DIAGONAL (ESTILO VALORANT/R6) -->
+  <!-- MENU PRINCIPAL: CARDS EM DIAGONAL (ESTILO VALORANT / R6) -->
   <main id="main-selection" class="selection-grid">
     
-    <!-- CARD 1: ID -->
+    <!-- CARD 1: ID (BATMAN) -->
     <div class="agent-card card-profile" onclick="openPage('page-profile')">
-      <div class="card-bg"></div>
+      <!-- TROQUE O URL ABAIXO PELA SUA IMAGEM DO BATMAN -->
+      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600');"></div>
+      <div class="card-overlay"></div>
       <div class="card-content">
         <span class="card-tag">01 // SUBJECT</span>
         <h2 class="card-title">QUEM É NVNES</h2>
@@ -33,9 +52,11 @@
       </div>
     </div>
 
-    <!-- CARD 2: SP GALLERY -->
+    <!-- CARD 2: SP GALLERY (DESTAQUES SP) -->
     <div class="agent-card card-gallery" onclick="openPage('page-gallery')">
-      <div class="card-bg"></div>
+      <!-- TROQUE O URL ABAIXO PELA SUA FOTO DE SP -->
+      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1578637387939-43c525550085?w=600');"></div>
+      <div class="card-overlay"></div>
       <div class="card-content">
         <span class="card-tag">02 // PHOTOS</span>
         <h2 class="card-title">SP GALLERY</h2>
@@ -43,9 +64,11 @@
       </div>
     </div>
 
-    <!-- CARD 3: SOUND -->
+    <!-- CARD 3: SOUND (MÚSICA CHELO) -->
     <div class="agent-card card-sound" onclick="openPage('page-sound')">
-      <div class="card-bg"></div>
+      <!-- TROQUE O URL ABAIXO PELA CAPA DA MÚSICA -->
+      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600');"></div>
+      <div class="card-overlay"></div>
       <div class="card-content">
         <span class="card-tag">03 // AUDIO</span>
         <h2 class="card-title">SOUND VIBE</h2>
@@ -53,9 +76,11 @@
       </div>
     </div>
 
-    <!-- CARD 4: FAITH -->
+    <!-- CARD 4: FAITH (CRISTO / BÍBLIA) -->
     <div class="agent-card card-faith" onclick="openPage('page-faith')">
-      <div class="card-bg"></div>
+      <!-- TROQUE O URL ABAIXO PELA FOTO DA BÍBLIA/CRUZ -->
+      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544717305-2782549b5136?w=600');"></div>
+      <div class="card-overlay"></div>
       <div class="card-content">
         <span class="card-tag">04 // CORE</span>
         <h2 class="card-title">FAITH</h2>
@@ -75,9 +100,10 @@
       <h1 class="page-title">Quem é Nvnes??</h1>
       <p class="page-subtitle">São Paulo — BR | 011</p>
       <div class="page-body">
-        <p>Por trás de cada pessoa existe um universo que não aparece na superfície. Desenvolvendo ideias, criando projetos e registrando a essência urbana sob a perspectiva noturna da cidade.</p>
+        <p>Desenvolvendo ideias, criando projetos e registrando a essência urbana sob a perspectiva noturna da cidade de São Paulo.</p>
       </div>
-      <a href="https://instagram.com" target="_blank" class="bat-btn">ACESSAR INSTAGRAM ↗</a>
+      <!-- LINK DO SEU INSTAGRAM DIRECTO -->
+      <a href="https://instagram.com/nunes17" target="_blank" class="bat-btn">ACESSAR INSTAGRAM ↗</a>
     </div>
   </section>
 
@@ -105,7 +131,7 @@
       <span class="page-badge">TRACK SELECTION</span>
       <h1 class="page-title">Chelo — Cara de Personalidade</h1>
       <div class="audio-card">
-        <p class="track-info">Suba o seu arquivo <strong>musica.mp3</strong> no GitHub para tocar direto no player abaixo:</p>
+        <p class="track-info">Ouça o trecho do som selecionado:</p>
         <audio controls class="bat-player">
           <source src="musica.mp3" type="audio/mpeg">
           Seu navegador não suporta o player de áudio.
@@ -125,7 +151,7 @@
       </blockquote>
       <span class="verse-ref">— Salmos 27:1</span>
       <div class="voice-controls">
-        <button onclick="speakVerse()" class="bat-btn">🔊 NARRAR SALMO NOVAMENTE</button>
+        <button onclick="speakVerse()" class="bat-btn">🔊 OUVIR NARRADOR NOVAMENTE</button>
       </div>
     </div>
   </section>
