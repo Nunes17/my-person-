@@ -3,108 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NVNES // SYSTEM ACCESS</title>
+  <title>NVNES // GOTHAM SELECTION</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- BARRA DE STATUS SUPERIOR -->
+  <!-- BARRA SUPERIOR DE SISTEMA -->
   <header class="system-bar">
-    <div class="brand-id">NVNES_OS // 011_SP</div>
-    <div class="system-status"><span class="blink-dot">●</span> SYSTEM READY</div>
+    <div class="brand-id">NVNES // OPERATIVE_SELECT</div>
+    <div class="system-status"><span class="blink">●</span> GOTHAM_BAT_LINK ACTIVE</div>
   </header>
 
-  <!-- ÁREA DE TRABALHO -->
-  <main class="desktop">
+  <!-- LOGO DO BATMAN NO FUNDO -->
+  <div class="bat-wallpaper"></div>
 
-    <!-- ÍCONES / QUADRADINHOS NA TELA -->
-    <div class="icons-container">
-      <div class="icon-card" onclick="openWindow('win-profile')">
-        <div class="icon-symbol">[ID]</div>
-        <span class="icon-title">_profile.sys</span>
-      </div>
-
-      <div class="icon-card" onclick="openWindow('win-gallery')">
-        <div class="icon-symbol">[SP]</div>
-        <span class="icon-title">_gallery.jpg</span>
-      </div>
-
-      <div class="icon-card" onclick="openWindow('win-sound')">
-        <div class="icon-symbol">[SND]</div>
-        <span class="icon-title">_sound.wav</span>
-      </div>
-
-      <div class="icon-card" onclick="openWindow('win-faith')">
-        <div class="icon-symbol">[FTH]</div>
-        <span class="icon-title">_faith.dat</span>
+  <!-- MENU PRINCIPAL: SELEÇÃO DE CARDS EM DIAGONAL (ESTILO VALORANT/R6) -->
+  <main id="main-selection" class="selection-grid">
+    
+    <!-- CARD 1: ID -->
+    <div class="agent-card card-profile" onclick="openPage('page-profile')">
+      <div class="card-bg"></div>
+      <div class="card-content">
+        <span class="card-tag">01 // SUBJECT</span>
+        <h2 class="card-title">QUEM É NVNES</h2>
+        <p class="card-sub">PROFILE & BIO</p>
       </div>
     </div>
 
-    <!-- JANELA 1: QUEM É NVNES -->
-    <div class="gotham-box content-box" id="win-profile">
-      <div class="box-header">
-        <span class="box-title">ID // QUEM É NVNES</span>
-        <button class="close-btn" onclick="closeWindow('win-profile')">[X]</button>
-      </div>
-      <div class="box-body">
-        <span class="tag">SUBJECT // PEDRO NEVES</span>
-        <h2>Quem é Nvnes??</h2>
-        <p class="sub">São Paulo — BR | 011</p>
-        <p class="text">Por trás de cada pessoa existe um universo que não aparece na superfície. Desenvolvendo ideias, criando projetos e registrando a essência urbana sob a perspectiva noturna.</p>
-        <a href="https://instagram.com" target="_blank" class="gotham-btn link-full">Acessar Instagram ↗</a>
+    <!-- CARD 2: SP GALLERY -->
+    <div class="agent-card card-gallery" onclick="openPage('page-gallery')">
+      <div class="card-bg"></div>
+      <div class="card-content">
+        <span class="card-tag">02 // PHOTOS</span>
+        <h2 class="card-title">SP GALLERY</h2>
+        <p class="card-sub">URBAN VISUALS 011</p>
       </div>
     </div>
 
-    <!-- JANELA 2: SP GALLERY -->
-    <div class="gotham-box content-box" id="win-gallery">
-      <div class="box-header">
-        <span class="box-title">GALERIA // SÃO PAULO 011</span>
-        <button class="close-btn" onclick="closeWindow('win-gallery')">[X]</button>
-      </div>
-      <div class="box-body">
-        <div class="gallery-wrapper">
-          <img src="https://images.unsplash.com/photo-1578637387939-43c525550085?w=600" id="img-target" class="gallery-frame" alt="SP Photo">
-          <p id="caption-target" class="caption-text">011 — Cidade de Pedra & Noite</p>
-          <div class="gallery-controls">
-            <button onclick="prevSlide()" class="gotham-btn small">❮ Ant</button>
-            <button onclick="nextSlide()" class="gotham-btn small">Próx ❯</button>
-          </div>
-        </div>
+    <!-- CARD 3: SOUND -->
+    <div class="agent-card card-sound" onclick="openPage('page-sound')">
+      <div class="card-bg"></div>
+      <div class="card-content">
+        <span class="card-tag">03 // AUDIO</span>
+        <h2 class="card-title">SOUND VIBE</h2>
+        <p class="card-sub">CHELO TRACK</p>
       </div>
     </div>
 
-    <!-- JANELA 3: SOUND -->
-    <div class="gotham-box content-box" id="win-sound">
-      <div class="box-header">
-        <span class="box-title">AUDIO // FREQUENCY</span>
-        <button class="close-btn" onclick="closeWindow('win-sound')">[X]</button>
-      </div>
-      <div class="box-body">
-        <span class="tag">SOUNDTRACK</span>
-        <h3>Gotham Nights Vibe</h3>
-        <p class="text">Sessões noturnas e referências sonoras do projeto.</p>
-      </div>
-    </div>
-
-    <!-- JANELA 4: FAITH -->
-    <div class="gotham-box content-box" id="win-faith">
-      <div class="box-header">
-        <span class="box-title">FAITH // PRINCIPLES</span>
-        <button class="close-btn" onclick="closeWindow('win-faith')">[X]</button>
-      </div>
-      <div class="box-body">
-        <span class="tag">VALORES</span>
-        <blockquote class="verse-quote">
-          "O Senhor é a minha luz e a minha salvação; de quem terei medo?"
-        </blockquote>
-        <span class="verse-ref">— Salmos 27:1</span>
+    <!-- CARD 4: FAITH -->
+    <div class="agent-card card-faith" onclick="openPage('page-faith')">
+      <div class="card-bg"></div>
+      <div class="card-content">
+        <span class="card-tag">04 // CORE</span>
+        <h2 class="card-title">FAITH</h2>
+        <p class="card-sub">SALMOS 27:1</p>
       </div>
     </div>
 
   </main>
+
+  <!-- ==================== PÁGINAS EM TELA CHEIA ==================== -->
+
+  <!-- PÁGINA 1: QUEM É NVNES -->
+  <section id="page-profile" class="full-page">
+    <div class="page-container">
+      <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
+      <span class="page-badge">SUBJECT // PEDRO NEVES</span>
+      <h1 class="page-title">Quem é Nvnes??</h1>
+      <p class="page-subtitle">São Paulo — BR | 011</p>
+      <div class="page-body">
+        <p>Por trás de cada pessoa existe um universo que não aparece na superfície. Desenvolvendo ideias, criando projetos e registrando a essência urbana sob a perspectiva noturna da cidade.</p>
+      </div>
+      <a href="https://instagram.com" target="_blank" class="bat-btn">ACESSAR INSTAGRAM ↗</a>
+    </div>
+  </section>
+
+  <!-- PÁGINA 2: SP GALLERY -->
+  <section id="page-gallery" class="full-page">
+    <div class="page-container">
+      <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
+      <span class="page-badge">VISUALS // SÃO PAULO</span>
+      <h1 class="page-title">SP Gallery 011</h1>
+      <div class="gallery-wrapper">
+        <img src="https://images.unsplash.com/photo-1578637387939-43c525550085?w=800" id="img-target" class="main-photo" alt="SP Photo">
+        <p id="caption-target" class="photo-caption">011 — Cidade de Pedra & Noite</p>
+        <div class="gallery-nav">
+          <button onclick="prevSlide()" class="bat-btn">❮ ANTERIOR</button>
+          <button onclick="nextSlide()" class="bat-btn">PRÓXIMA ❯</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PÁGINA 3: SOUND -->
+  <section id="page-sound" class="full-page">
+    <div class="page-container">
+      <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
+      <span class="page-badge">TRACK SELECTION</span>
+      <h1 class="page-title">Chelo — Cara de Personalidade</h1>
+      <div class="audio-card">
+        <p class="track-info">Suba o seu arquivo <strong>musica.mp3</strong> no GitHub para tocar direto no player abaixo:</p>
+        <audio controls class="bat-player">
+          <source src="musica.mp3" type="audio/mpeg">
+          Seu navegador não suporta o player de áudio.
+        </audio>
+      </div>
+    </div>
+  </section>
+
+  <!-- PÁGINA 4: FAITH -->
+  <section id="page-faith" class="full-page">
+    <div class="page-container">
+      <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
+      <span class="page-badge">PRINCIPLES & CORE</span>
+      <h1 class="page-title">Faith</h1>
+      <blockquote class="verse-quote">
+        "O Senhor é a minha luz e a minha salvação; de quem terei medo?"
+      </blockquote>
+      <span class="verse-ref">— Salmos 27:1</span>
+      <div class="voice-controls">
+        <button onclick="speakVerse()" class="bat-btn">🔊 NARRAR SALMO NOVAMENTE</button>
+      </div>
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>
