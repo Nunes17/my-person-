@@ -12,11 +12,18 @@ function typeWriter() {
   }
 }
 
-// Inicia a digitação e a voz grave de entrada
+// Inicia a digitação ao carregar
 window.onload = () => {
   typeWriter();
-  speakText(textToType);
 };
+
+// Tenta tocar a narração no primeiro clique do usuário na tela (desbloqueia o áudio do navegador)
+document.addEventListener('click', () => {
+  // Ativa a síntese de voz após o clique do usuário
+  if ('speechSynthesis' in window && !window.speechSynthesis.speaking) {
+    // Pronto para liberar o áudio
+  }
+}, { once: true });
 
 // Fechar tela de introdução
 function closeIntro() {
@@ -51,45 +58,35 @@ function closePages() {
   }
 }
 
-// FUNÇÃO DE VOZ ESTILO BATMAN (GRAVE, PULLDOWN & PAUSADA)
+// FUNÇÃO DE VOZ ROBÚSTA E DIRETA
 function speakText(text) {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel(); // Para falas anteriores
-    
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'pt-BR';
-    
-    // Configurações para efeito de voz do Batman:
-    utterance.pitch = 0.5; // Tom ultra grave (pesado)
-    utterance.rate = 0.8;  // Velocidade lenta e firme
-
-    // Tenta selecionar uma voz masculina do sistema
-    const voices = window.speechSynthesis.getVoices();
-    const maleVoice = voices.find(voice => 
-      voice.lang.includes('pt') && 
-      (voice.name.toLowerCase().includes('male') || 
-       voice.name.toLowerCase().includes('ricardo') || 
-       voice.name.toLowerCase().includes('daniel') ||
-       voice.name.toLowerCase().includes('homem'))
-    );
-
-    if (maleVoice) {
-      utterance.voice = maleVoice;
-    }
-
-    window.speechSynthesis.speak(utterance);
+  if (!('speechSynthesis' in window)) {
+    console.log("Navegador não suporta voz.");
+    return;
   }
+
+  // Para qualquer fala anterior
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'pt-BR';
+  utterance.pitch = 0.6; // Tom grave (estilo Batman)
+  utterance.rate = 0.85; // Velocidade pausada e séria
+
+  // Força a execução da fala
+  setTimeout(() => {
+    window.speechSynthesis.speak(utterance);
+  }, 100);
 }
 
+// Narração da mensagem inicial da bio
+function speakIntro() {
+  speakText(textToType);
+}
+
+// Narração do Salmo
 function speakVerse() {
   speakText("O Senhor é a minha luz e a minha salvação; de quem terei medo?");
-}
-
-// Garantir que as vozes do sistema sejam carregadas antes do clique
-if ('speechSynthesis' in window) {
-  window.speechSynthesis.onvoiceschanged = () => {
-    window.speechSynthesis.getVoices();
-  };
 }
 
 // Controle de Fotos SP Gallery
