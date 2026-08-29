@@ -1,49 +1,56 @@
-// Efeito de Texto Digitado no Terminal
-const textToType = “Por trás de cada pessoa existe um universo que não aparece na superfície. Este é um pouco do MEU..”;
+// Digitação do texto inicial bloqueante
+const textToType = "Por trás de cada pessoa existe um universo que não aparece na superfície. Este é um pouco do MEU..";
 let index = 0;
 
 function typeWriter() {
   if (index < textToType.length) {
     document.getElementById("typed-text").innerHTML += textToType.charAt(index);
     index++;
-    setTimeout(typeWriter, 40); // Velocidade da digitação
+    setTimeout(typeWriter, 35);
+  } else {
+    document.getElementById("close-intro-btn").style.display = "inline-block";
   }
 }
 
 window.onload = typeWriter;
 
-// Função para Trocar de Aba
-function switchTab(tabId, element) {
-  // Esconde todos os conteúdos
-  const contents = document.querySelectorAll('.tab-content');
-  contents.forEach(content => content.classList.remove('active'));
-
-  // Remove estado ativo dos botões
-  const buttons = document.querySelectorAll('.tab-btn');
-  buttons.forEach(btn => btn.classList.remove('active'));
-
-  // Ativa a aba e o botão selecionados
-  document.getElementById(tabId).classList.add('active');
-  element.classList.add('active');
+// Fechar tela de introdução
+function closeIntro() {
+  document.getElementById("intro-overlay").style.display = "none";
 }
 
-// Lógica do Slide de Fotos
+// Abrir e fechar janelas do Desktop
+function openWindow(id) {
+  // Esconde todas para manter organizado
+  const allWindows = document.querySelectorAll('.content-box');
+  allWindows.forEach(win => win.style.display = 'none');
+
+  // Exibe apenas a janela clicada
+  const targetWin = document.getElementById(id);
+  if (targetWin) {
+    targetWin.style.display = "block";
+  }
+}
+
+function closeWindow(id) {
+  const targetWin = document.getElementById(id);
+  if (targetWin) {
+    targetWin.style.display = "none";
+  }
+}
+
+// Slide da Galeria de Fotos
 const photos = [
   { url: "https://images.unsplash.com/photo-1578637387939-43c525550085?w=600", caption: "011 — Cidade de Pedra & Noite" },
-  { url: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600", caption: "011 — Luzes & Referências Urbanas" },
-  { url: "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=600", caption: "011 — Arquitetura Noturna" }
+  { url: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600", caption: "011 — Arquitetura Noturna" },
+  { url: "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=600", caption: "011 — Luzes Urbanas SP" }
 ];
 
 let currentSlide = 0;
 
 function updateSlide() {
-  const imgElement = document.getElementById("img-target");
-  const captionElement = document.getElementById("caption-target");
-  
-  if (imgElement && captionElement) {
-    imgElement.src = photos[currentSlide].url;
-    captionElement.innerText = photos[currentSlide].caption;
-  }
+  document.getElementById("img-target").src = photos[currentSlide].url;
+  document.getElementById("caption-target").innerText = photos[currentSlide].caption;
 }
 
 function nextSlide() {
