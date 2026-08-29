@@ -1,31 +1,10 @@
-// Digitação do texto inicial bloqueante
-const textToType = "Por trás de cada pessoa existe um universo que não aparece na superfície. Este é um pouco do MEU..";
-let index = 0;
-
-function typeWriter() {
-  if (index < textToType.length) {
-    document.getElementById("typed-text").innerHTML += textToType.charAt(index);
-    index++;
-    setTimeout(typeWriter, 35);
-  } else {
-    document.getElementById("close-intro-btn").style.display = "inline-block";
-  }
-}
-
-window.onload = typeWriter;
-
-// Fechar tela de introdução
-function closeIntro() {
-  document.getElementById("intro-overlay").style.display = "none";
-}
-
 // Abrir e fechar janelas do Desktop
 function openWindow(id) {
-  // Esconde todas para manter organizado
+  // Esconde todas as janelas abertas
   const allWindows = document.querySelectorAll('.content-box');
   allWindows.forEach(win => win.style.display = 'none');
 
-  // Exibe apenas a janela clicada
+  // Abre a janela clicada
   const targetWin = document.getElementById(id);
   if (targetWin) {
     targetWin.style.display = "block";
