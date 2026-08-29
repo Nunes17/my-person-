@@ -14,22 +14,7 @@ body {
   background-size: 24px 24px;
 }
 
-/* OVERLAY BLOQUEANTE DA INTRO */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(4, 4, 6, 0.95);
-  backdrop-filter: blur(10px);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* BARRA DE STATUS SUPERIOR */
+/* BARRA SUPERIOR */
 .system-bar {
   height: 36px;
   background: #0d0d10;
@@ -46,18 +31,60 @@ body {
 .system-status { color: #00f0ff; }
 .blink-dot { animation: blink 1s infinite; color: #ffbf00; margin-right: 4px; }
 
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ÁREA DE TRABALHO E ÍCONES */
+.desktop {
+  padding: 40px;
+  height: calc(100vh - 36px);
+  position: relative;
+}
+
+.icons-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.icon-card {
+  width: 110px;
+  height: 100px;
+  background: #111116;
+  border: 1px solid #22222e;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-card:hover {
+  border-color: #00f0ff;
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.icon-symbol {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  color: #00f0ff;
+  margin-bottom: 8px;
+}
+
+.icon-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #888;
+}
+
 /* DESIGN CAIXAS GOTHAM */
 .gotham-box {
   background: #101014;
   border: 1px solid #1f1f28;
   box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-}
-
-.intro-box {
-  width: 90%;
-  max-width: 500px;
-  border-color: #00f0ff;
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
 }
 
 .box-header {
@@ -89,20 +116,6 @@ body {
 .close-btn:hover { color: #fff; }
 
 .box-body { padding: 20px; }
-.box-footer { padding: 0 20px 20px; text-align: right; }
-
-/* TERMINAL TEXT */
-.terminal-text {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  color: #00f0ff;
-  line-height: 1.6;
-  min-height: 80px;
-}
-
-.prompt { color: #ffbf00; margin-right: 6px; }
-.cursor { animation: blink 0.8s infinite; color: #fff; }
-@keyframes blink { 50% { opacity: 0; } }
 
 /* BOTAO GOTHAM */
 .gotham-btn {
@@ -120,60 +133,13 @@ body {
 .link-full { display: block; text-align: center; text-decoration: none; margin-top: 10px; }
 .gotham-btn.small { padding: 6px; flex: 1; }
 
-/* ÁREA DE TRABALHO E ÍCONES */
-.desktop {
-  padding: 40px;
-  height: calc(100vh - 36px);
-  position: relative;
-}
-
-.icons-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.icon-card {
-  width: 100px;
-  height: 90px;
-  background: #111116;
-  border: 1px solid #22222e;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.icon-card:hover {
-  border-color: #00f0ff;
-  transform: translateY(-3px);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
-}
-
-.icon-symbol {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
-  font-weight: bold;
-  color: #00f0ff;
-  margin-bottom: 6px;
-}
-
-.icon-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  color: #888;
-}
-
-/* JANELAS DE CONTEÚDO FLUTUANTES */
+/* JANELAS DE CONTEÚDO */
 .content-box {
   position: absolute;
-  top: 150px;
+  top: 160px;
   left: 40px;
   width: 380px;
-  display: none; /* Inicia oculto para não ter poluição */
+  display: none;
   z-index: 100;
 }
 
