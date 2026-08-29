@@ -11,32 +11,16 @@
 </head>
 <body>
 
-  <!-- TELA INICIAL BLOQUEANTE (MENSAGEM DE ENTRADA) -->
-  <div id="intro-overlay" class="overlay">
-    <div class="gotham-box intro-box">
-      <div class="box-header">
-        <span class="box-title">SYSTEM_INIT // WELCOME.TXT</span>
-        <button class="close-btn" onclick="closeIntro()">[X]</button>
-      </div>
-      <div class="box-body terminal-text">
-        <span class="prompt">></span>
-        <span id="typed-text"></span><span class="cursor">|</span>
-      </div>
-      <div class="box-footer">
-        <button id="close-intro-btn" class="gotham-btn" onclick="closeIntro()" style="display: none;">[ ACESSAR PAINEL ]</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- BARRA DE STATUS SUPERIOR GOTHAM -->
+  <!-- BARRA DE STATUS SUPERIOR -->
   <header class="system-bar">
     <div class="brand-id">NVNES_OS // 011_SP</div>
-    <div class="system-status"><span class="blink-dot">●</span> CURSOR LIBERADO</div>
+    <div class="system-status"><span class="blink-dot">●</span> SYSTEM READY</div>
   </header>
 
-  <!-- ÁREA DE TRABALHO COM ÍCONES ORGANIZADOS -->
+  <!-- ÁREA DE TRABALHO -->
   <main class="desktop">
 
+    <!-- ÍCONES / QUADRADINHOS NA TELA -->
     <div class="icons-container">
       <div class="icon-card" onclick="openWindow('win-profile')">
         <div class="icon-symbol">[ID]</div>
@@ -66,10 +50,10 @@
         <button class="close-btn" onclick="closeWindow('win-profile')">[X]</button>
       </div>
       <div class="box-body">
-        <span class="tag">SUBJECT //NICKOLLAS NUNES </span>
+        <span class="tag">SUBJECT // PEDRO NEVES</span>
         <h2>Quem é Nvnes??</h2>
         <p class="sub">São Paulo — BR | 011</p>
-        <p class="text">Começando engenharia de software,Mais um futuro vencedor da zona leste de Sp, Deus acima de todas as coisas, de Brasília pro mundo, Venca comigo ou me veja Vencendo. </p>
+        <p class="text">Por trás de cada pessoa existe um universo que não aparece na superfície. Desenvolvendo ideias, criando projetos e registrando a essência urbana sob a perspectiva noturna.</p>
         <a href="https://instagram.com" target="_blank" class="gotham-btn link-full">Acessar Instagram ↗</a>
       </div>
     </div>
