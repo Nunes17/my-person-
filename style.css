@@ -98,26 +98,97 @@ body {
 .blink { animation: blinker 1s infinite; color: #ffbf00; margin-right: 4px; }
 @keyframes blinker { 50% { opacity: 0; } }
 
-/* LOGO DO BATMAN NO FUNDO */
-.bat-wallpaper {
+/* MAPA INTERATIVO DE FUNDO */
+.city-map {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 350px;
-  background: url('https://upload.wikimedia.org/wikipedia/commons/e/e5/Batman_logo.svg') no-repeat center center;
-  background-size: contain;
-  opacity: 0.05;
-  filter: drop-shadow(0 0 20px #00f0ff);
-  pointer-events: none;
+  inset: 0;
   z-index: 1;
+  opacity: 0.35;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s;
+  pointer-events: none;
 }
+
+#map-svg { width: 100%; height: 100%; }
+
+.map-grid line {
+  stroke-opacity: 0.4;
+  stroke-width: 1.5;
+}
+
+.city-buildings rect {
+  fill: #0a1a35;
+  stroke: #1c3a63;
+  stroke-width: 1;
+}
+
+.city-buildings .building-window {
+  fill: #4dd8ff;
+  stroke: none;
+  opacity: 0.6;
+  animation: windowFlicker 4s infinite ease-in-out;
+}
+
+.city-buildings .building-window:nth-child(odd) {
+  animation-delay: 1.3s;
+}
+
+.city-buildings .building-window:nth-child(3n) {
+  animation-delay: 2.6s;
+}
+
+@keyframes windowFlicker {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.hero-dot {
+  fill: #ffbf00;
+  filter: drop-shadow(0 0 6px #ffbf00);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.villain-icon image,
+.hero-icon image,
+.sidekick-icon image {
+  filter: grayscale(10%) contrast(115%);
+}
+
+.icon-ring {
+  fill: none;
+  stroke-width: 3;
+}
+
+.villain-ring {
+  stroke: #ff003c;
+  filter: drop-shadow(0 0 8px #ff003c);
+}
+
+.hero-ring {
+  stroke: #00f0ff;
+  filter: drop-shadow(0 0 10px #00f0ff);
+}
+
+.sidekick-ring {
+  stroke: #ffbf00;
+  filter: drop-shadow(0 0 8px #ffbf00);
+}
+
+/* Quando passa o mouse num card, o mapa dá um "zoom" na direção dele */
+.city-map.zoomed { opacity: 0.55; }
+.city-map.zoom-1 { transform: scale(1.4) translate(-10%, -10%); }
+.city-map.zoom-2 { transform: scale(1.4) translate(5%, -8%); }
+.city-map.zoom-3 { transform: scale(1.4) translate(-5%, 8%); }
+.city-map.zoom-4 { transform: scale(1.4) translate(10%, 5%); }
+.city-map.zoom-5 { transform: scale(1.4) translate(0%, 0%); }
 
 /* CARDS EM DIAGONAL (ESTILO VALORANT / R6) */
 .selection-grid {
   display: flex;
-  gap: 15px;
   padding: 40px 30px;
   height: calc(100vh - 40px);
   align-items: center;
@@ -127,7 +198,8 @@ body {
 }
 
 .agent-card {
-  flex: 1;
+  flex: 0 0 auto;
+  width: 260px;
   height: 85%;
   max-width: 260px;
   background: #101015;
@@ -135,14 +207,24 @@ body {
   clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
   position: relative;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
+  margin-left: -70px;
 }
 
+.agent-card:first-child { margin-left: 0; }
+
+.agent-card:nth-child(1) { z-index: 1; }
+.agent-card:nth-child(2) { z-index: 2; }
+.agent-card:nth-child(3) { z-index: 3; }
+.agent-card:nth-child(4) { z-index: 4; }
+.agent-card:nth-child(5) { z-index: 5; }
+
 .agent-card:hover {
-  transform: translateY(-10px) scale(1.03);
+  transform: translateY(-50px) scale(1.08);
   border-color: #00f0ff;
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 240, 255, 0.35);
+  z-index: 50;
 }
 
 .card-img {
