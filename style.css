@@ -192,6 +192,44 @@ body {
 
 .card-sub { font-size: 11px; color: #777; font-family: 'JetBrains Mono', monospace; }
 
+/* SCAN-LINE NOS CARDS DO MENU (HOVER) */
+.agent-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -20%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(180deg, transparent, #00f0ff, transparent);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.agent-card:hover::after {
+  animation: cardScan 1.2s linear infinite;
+}
+
+@keyframes cardScan {
+  0%   { top: -10%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
+
+/* leve tremor de glitch no título ao passar o mouse */
+.agent-card:hover .card-title {
+  animation: titleGlitch 0.3s steps(2, end) 1;
+}
+
+@keyframes titleGlitch {
+  0%   { transform: translate(0); text-shadow: none; }
+  25%  { transform: translate(-1px, 1px); text-shadow: 1px 0 #ff003c, -1px 0 #00f0ff; }
+  50%  { transform: translate(1px, -1px); text-shadow: -1px 0 #ff003c, 1px 0 #00f0ff; }
+  75%  { transform: translate(-1px, 0); text-shadow: 1px 0 #ff003c, -1px 0 #00f0ff; }
+  100% { transform: translate(0); text-shadow: none; }
+}
+
 /* PÁGINAS EM TELA CHEIA */
 .full-page {
   position: fixed;
@@ -245,9 +283,87 @@ body {
 
 /* GALERIA SP */
 .gallery-wrapper { margin-top: 20px; }
-.main-photo { width: 100%; height: 350px; object-fit: cover; border: 1px solid #222; }
 .photo-caption { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; margin: 10px 0 20px; }
 .gallery-nav { display: flex; gap: 10px; }
+
+/* FRAME COM EFEITO GLITCH NA TROCA DE FOTO */
+.photo-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #222;
+  background: #000;
+}
+
+.photo-frame .main-photo {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+  border: none;
+}
+
+.photo-frame::before,
+.photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--photo-url);
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.photo-frame::before { background-color: #ff003c; filter: brightness(0.6); }
+.photo-frame::after  { background-color: #00f0ff; filter: brightness(0.6); }
+
+.photo-frame.glitching::before { animation: glitchRed 0.4s steps(2, end); }
+.photo-frame.glitching::after  { animation: glitchCyan 0.4s steps(2, end); }
+.photo-frame.glitching .main-photo { animation: glitchImg 0.4s steps(2, end); }
+
+.scan-line {
+  position: absolute;
+  left: 0; top: -10%;
+  width: 100%; height: 6px;
+  background: linear-gradient(180deg, transparent, rgba(0,240,255,0.9), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.photo-frame.glitching .scan-line { animation: scanSweep 0.4s linear; }
+
+@keyframes glitchRed {
+  0%   { opacity: 0;  transform: translate(0); }
+  10%  { opacity: .6; transform: translate(-8px, 2px); }
+  30%  { opacity: .4; transform: translate(6px, -3px); }
+  50%  { opacity: .6; transform: translate(-4px, 1px); }
+  70%  { opacity: .3; transform: translate(3px, -1px); }
+  100% { opacity: 0;  transform: translate(0); }
+}
+
+@keyframes glitchCyan {
+  0%   { opacity: 0;  transform: translate(0); }
+  10%  { opacity: .6; transform: translate(8px, -2px); }
+  30%  { opacity: .4; transform: translate(-6px, 3px); }
+  50%  { opacity: .6; transform: translate(4px, -1px); }
+  70%  { opacity: .3; transform: translate(-3px, 1px); }
+  100% { opacity: 0;  transform: translate(0); }
+}
+
+@keyframes glitchImg {
+  0%   { filter: none; transform: translate(0); }
+  10%  { filter: contrast(1.4) saturate(0); transform: translate(-3px, 0); }
+  30%  { filter: none; transform: translate(3px, 0); }
+  50%  { filter: brightness(1.4); transform: translate(-2px, 1px); }
+  70%  { filter: none; transform: translate(2px, -1px); }
+  100% { filter: none; transform: translate(0); }
+}
+
+@keyframes scanSweep {
+  0%   { top: -10%; opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
 
 /* PLAYER CHELO */
 .audio-card { background: #111116; padding: 25px; border: 1px solid #222; margin-top: 20px; }
