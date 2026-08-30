@@ -1,34 +1,32 @@
-// Texto de Introdução digitado na tela
+// Frase de Introdução da Tela de Entrada
 const textToType = "Por trás de cada pessoa existe um universo que não aparece na superfície. Este é um pouco do MEU..";
 let index = 0;
 
 function typeWriter() {
-  const typedTarget = document.getElementById("typed-text");
-  const btnTarget = document.getElementById("close-intro-btn");
-
-  if (typedTarget && index < textToType.length) {
-    typedTarget.innerHTML += textToType.charAt(index);
+  if (index < textToType.length) {
+    document.getElementById("typed-text").innerHTML += textToType.charAt(index);
     index++;
     setTimeout(typeWriter, 35);
-  } else if (btnTarget) {
-    btnTarget.style.display = "inline-block";
+  } else {
+    document.getElementById("close-intro-btn").style.display = "inline-block";
   }
 }
 
-// Inicia a digitação ao carregar a página
+// Inicia a digitação e a voz narradora de entrada
 window.onload = () => {
   typeWriter();
+  speakText(textToType);
 };
 
-// Fechar a tela de introdução
+// Fechar tela de introdução
 function closeIntro() {
-  const overlay = document.getElementById("intro-overlay");
-  if (overlay) {
-    overlay.style.display = "none";
+  document.getElementById("intro-overlay").style.display = "none";
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
   }
 }
 
-// Controle de abertura de páginas
+// Controle de abertura de páginas em tela cheia
 function openPage(pageId) {
   const pages = document.querySelectorAll('.full-page');
   pages.forEach(p => p.style.display = 'none');
@@ -37,37 +35,49 @@ function openPage(pageId) {
   if (targetPage) {
     targetPage.style.display = 'block';
   }
+
+  // Narração de voz na aba FAITH
+  if (pageId === 'page-faith') {
+    speakVerse();
+  }
 }
 
 function closePages() {
   const pages = document.querySelectorAll('.full-page');
   pages.forEach(p => p.style.display = 'none');
+
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
 }
 
-// Galeria SP — 10 Fotos
+// Função de Narração por Voz
+function speakText(text) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'pt-BR';
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  }
+}
+
+function speakVerse() {
+  speakText("O Senhor é a minha luz e a minha salvação; de quem terei medo?");
+}
+
+// Controle de Fotos SP Gallery
 const photos = [
-  { url: "imagens/sp1.jpg", caption: "011 — Noite & Rotina Urbana" },
-  { url: "imagens/sp2.jpg", caption: "011 — Arquitetura Noturna" },
-  { url: "imagens/sp3.jpg", caption: "011 — Perspectiva SP" },
-  { url: "imagens/sp4.jpg", caption: "011 — Luzes & Asfalto" },
-  { url: "imagens/sp5.jpg", caption: "011 — Essência da Cidade" },
-  { url: "imagens/sp6.jpg", caption: "011 — Concreto & Movimento" },
-  { url: "imagens/sp7.jpg", caption: "011 — Visual Noturno" },
-  { url: "imagens/sp8.jpg", caption: "011 — Geometria Urbana" },
-  { url: "imagens/sp9.jpg", caption: "011 — São Paulo Mood" },
-  { url: "imagens/sp10.jpg", caption: "011 — Visão de Gotham" }
+  { url: "https://images.unsplash.com/photo-1578637387939-43c525550085?w=800", caption: "011 — Cidade de Pedra & Noite" },
+  { url: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800", caption: "011 — Arquitetura Noturna" },
+  { url: "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=800", caption: "011 — Luzes Urbanas SP" }
 ];
 
 let currentSlide = 0;
 
 function updateSlide() {
-  const imgElem = document.getElementById("img-target");
-  const capElem = document.getElementById("caption-target");
-
-  if (imgElem && capElem) {
-    imgElem.src = photos[currentSlide].url;
-    capElem.innerText = photos[currentSlide].caption;
-  }
+  document.getElementById("img-target").src = photos[currentSlide].url;
+  document.getElementById("caption-target").innerText = photos[currentSlide].caption;
 }
 
 function nextSlide() {
