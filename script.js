@@ -65,9 +65,18 @@ function speakVerse() {
 // Controle de Fotos SP Gallery
 // TROQUE os caminhos abaixo pelos nomes reais das suas fotos na pasta "fotos/"
 const photos = [
-  { url: "fotos/sp-01.jpeg", caption: "011 — Cidade de Pedra & Noite" },
-  { url: "fotos/sp-02.jpeg", caption: "011 — Arquitetura Noturna" },
-  { url: "fotos/sp-03.jpeg", caption: "011 — Luzes Urbanas SP" }
+  { url: "sp1.jpeg", caption: "011 — SP 01" },
+  { url: "sp2.jpeg", caption: "011 — SP 02" },
+  { url: "sp3.jpeg", caption: "011 — SP 03" },
+  { url: "sp4.jpeg", caption: "011 — SP 04" },
+  { url: "sp5.jpeg", caption: "011 — SP 05" },
+  { url: "sp6.jpeg", caption: "011 — SP 06" },
+  { url: "sp7.jpeg", caption: "011 — SP 07" },
+  { url: "sp8.jpeg", caption: "011 — SP 08" },
+  { url: "sp9.jpeg", caption: "011 — SP 09" },
+  { url: "sp10.jpeg", caption: "011 — SP 10" },
+  { url: "sp11.jpeg", caption: "011 — SP 11" },
+  { url: "sp12.jpeg", caption: "011 — SP 12" }
 ];
 
 let currentSlide = 0;
@@ -103,3 +112,16 @@ function prevSlide() {
   currentSlide = (currentSlide - 1 + photos.length) % photos.length;
   updateSlide();
 }
+
+// MAPA INTERATIVO: dá um "zoom" na direção do card quando o mouse passa por cima
+const cityMap = document.getElementById('city-map');
+const allCards = document.querySelectorAll('.agent-card');
+
+allCards.forEach((card, i) => {
+  card.addEventListener('mouseenter', () => {
+    cityMap.classList.add('zoomed', `zoom-${i + 1}`);
+  });
+  card.addEventListener('mouseleave', () => {
+    cityMap.classList.remove('zoomed', `zoom-${i + 1}`);
+  });
+});
