@@ -1,161 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NVNES // GOTHAM SELECTION</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVNES // GOTHAM SELECTION</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- TELA INICIAL BLOQUEANTE (WELCOME / INTRODUÇÃO) -->
-  <div id="intro-overlay" class="overlay">
-    <div class="intro-box">
-      <div class="box-header">
-        <span class="box-title">SYSTEM_INIT // WELCOME.TXT</span>
-        <button class="close-btn" onclick="closeIntro()">[X]</button>
-      </div>
-      <div class="box-body terminal-text">
-        <span class="prompt">></span>
-        <span id="typed-text"></span><span class="cursor">|</span>
-      </div>
-      <div class="box-footer">
-        <button id="close-intro-btn" class="bat-btn" onclick="closeIntro()" style="display: none;">[ ACESSAR PAINEL ]</button>
-      </div>
+<!-- TELA INICIAL BLOQUEANTE (WELCOME / INTRODUÇÃO) -->
+<div id="intro-overlay" class="overlay">
+  <div class="intro-box">
+    <div class="box-header">
+      <span class="box-title">SYSTEM_INIT // WELCOME.TXT</span>
+      <button class="close-btn" onclick="closeIntro()">[X]</button>
+    </div>
+    <div class="box-body terminal-text">
+      <span class="prompt">></span>
+      <span id="typed-text"></span><span class="cursor">|</span>
+    </div>
+    <div class="box-footer">
+      <button id="close-intro-btn" class="bat-btn" onclick="closeIntro()" style="display: none;">[ ACESSAR PAINEL ]</button>
+    </div>
+  </div>
+</div>
+
+<!-- BARRA SUPERIOR DE SISTEMA -->
+<header class="system-bar">
+  <div class="brand-id">NVNES // OPERATIVE_SELECT</div>
+  <div class="system-status"><span class="blink">●</span> YOUR MOOD</div>
+</header>
+
+<!-- LOGO DO BATMAN NO FUNDO -->
+<div class="bat-wallpaper"></div>
+
+<!-- MENU PRINCIPAL: CARDS EM DIAGONAL (ESTILO VALORANT / R6) -->
+<main id="main-selection" class="selection-grid">
+
+  <!-- CARD 1: PERFIL -->
+  <div class="agent-card card-profile" onclick="openPage('page-profile')">
+    <!-- TROQUE 'fotos/capa-perfil.jpeg' PELO NOME DA SUA FOTO -->
+    <div class="card-img" style="background-image: url('fotos/capa-perfil.jpeg');"></div>
+    <div class="card-overlay"></div>
+    <div class="card-content">
+      <span class="card-tag">01 // SUBJECT</span>
+      <h2 class="card-title">QUEM É NVNES</h2>
+      <p class="card-sub">PROFILE & BIO</p>
     </div>
   </div>
 
-  <!-- BARRA SUPERIOR DE SISTEMA -->
-  <header class="system-bar">
-    <div class="brand-id">NVNES // OPERATIVE_SELECT</div>
-    <div class="system-status"><span class="blink">●</span> YOUR MOOD</div>
-  </header>
+  <!-- CARD 2: SP GALLERY (DESTAQUES SP) -->
+  <div class="agent-card card-gallery" onclick="openPage('page-gallery')">
+    <!-- TROQUE 'fotos/capa-sp.jpeg' PELO NOME DA SUA FOTO -->
+    <div class="card-img" style="background-image: url('fotos/capa-sp.jpeg');"></div>
+    <div class="card-overlay"></div>
+    <div class="card-content">
+      <span class="card-tag">02 // PHOTOS</span>
+      <h2 class="card-title">SP GALLERY</h2>
+      <p class="card-sub">URBAN VISUALS 011</p>
+    </div>
+  </div>
 
-  <!-- LOGO DO BATMAN NO FUNDO -->
-  <div class="bat-wallpaper"></div>
+  <!-- CARD 3: SOUND (MÚSICA CHELO) -->
+  <div class="agent-card card-sound" onclick="openPage('page-sound')">
+    <!-- TROQUE 'fotos/capa-som.jpeg' PELO NOME DA SUA FOTO -->
+    <div class="card-img" style="background-image: url('fotos/capa-som.jpeg');"></div>
+    <div class="card-overlay"></div>
+    <div class="card-content">
+      <span class="card-tag">03 // AUDIO</span>
+      <h2 class="card-title">SOUND VIBE</h2>
+      <p class="card-sub">CHELO TRACK</p>
+    </div>
+  </div>
 
-  <!-- MENU PRINCIPAL: CARDS EM DIAGONAL (ESTILO VALORANT / R6) -->
-  <main id="main-selection" class="selection-grid">
-    
-    <!-- CARD 1: ID (BATMAN) -->
-    <div class="agent-card card-profile" onclick="openPage('page-profile')">
-      <!-- TROQUE O URL ABAIXO PELA SUA IMAGEM DO BATMAN -->
-      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600');"></div>
-      <div class="card-overlay"></div>
-      <div class="card-content">
-        <span class="card-tag">01 // SUBJECT</span>
-        <h2 class="card-title">QUEM É NVNES</h2>
-        <p class="card-sub">PROFILE & BIO</p>
+  <!-- CARD 4: FAITH (CRISTO / BÍBLIA) -->
+  <div class="agent-card card-faith" onclick="openPage('page-faith')">
+    <!-- TROQUE 'fotos/capa-fe.jpeg' PELO NOME DA SUA FOTO -->
+    <div class="card-img" style="background-image: url('fotos/capa-fe.jpeg');"></div>
+    <div class="card-overlay"></div>
+    <div class="card-content">
+      <span class="card-tag">04 // CORE</span>
+      <h2 class="card-title">FAITH</h2>
+      <p class="card-sub">SALMOS 27:1</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ==================== PÁGINAS EM TELA CHEIA ==================== -->
+
+<!-- PÁGINA 1: QUEM É NVNES -->
+<section id="page-profile" class="full-page">
+  <div class="page-container">
+    <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
+    <span class="page-badge">SUBJECT // PEDRO NEVES</span>
+    <h1 class="page-title">Quem é Nvnes??</h1>
+    <p class="page-subtitle">São Paulo — BR | 011</p>
+    <div class="page-body">
+      <p>Desenvolvendo ideias, criando projetos e registrando a essência urbana sob a perspectiva noturna da cidade de São Paulo.</p>
+    </div>
+    <!-- LINK DO SEU INSTAGRAM DIRECTO -->
+    <a href="https://instagram.com/nunes17" target="_blank" class="bat-btn">ACESSAR INSTAGRAM ↗</a>
+  </div>
+</section>
+
+<!-- PÁGINA 2: SP GALLERY -->
+<section id="page-gallery" class="full-page">
+  <div class="page-container">
+    <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
+    <span class="page-badge">VISUALS // SÃO PAULO</span>
+    <h1 class="page-title">SP Gallery 011</h1>
+
+    <div class="gallery-wrapper">
+      <!-- FRAME COM EFEITO GLITCH NA TROCA DE FOTO -->
+      <div class="photo-frame" id="photo-frame">
+        <!-- TROQUE 'fotos/sp-01.jpeg' PELA SUA PRIMEIRA FOTO -->
+        <img src="fotos/sp-01.jpeg" id="img-target" class="main-photo" alt="SP Photo">
+        <div class="scan-line"></div>
+      </div>
+      <p id="caption-target" class="photo-caption">011 — Cidade de Pedra & Noite</p>
+      <div class="gallery-nav">
+        <button onclick="prevSlide()" class="bat-btn">❮ ANTERIOR</button>
+        <button onclick="nextSlide()" class="bat-btn">PRÓXIMA ❯</button>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- CARD 2: SP GALLERY (DESTAQUES SP) -->
-    <div class="agent-card card-gallery" onclick="openPage('page-gallery')">
-      <!-- TROQUE O URL ABAIXO PELA SUA FOTO DE SP -->
-      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1578637387939-43c525550085?w=600');"></div>
-      <div class="card-overlay"></div>
-      <div class="card-content">
-        <span class="card-tag">02 // PHOTOS</span>
-        <h2 class="card-title">SP GALLERY</h2>
-        <p class="card-sub">URBAN VISUALS 011</p>
-      </div>
+<!-- PÁGINA 3: SOUND -->
+<section id="page-sound" class="full-page">
+  <div class="page-container">
+    <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
+    <span class="page-badge">TRACK SELECTION</span>
+    <h1 class="page-title">Chelo — Cara de Personalidade</h1>
+    <div class="audio-card">
+      <p class="track-info">Ouça o trecho do som selecionado:</p>
+      <audio controls class="bat-player">
+        <source src="musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta o player de áudio.
+      </audio>
     </div>
+  </div>
+</section>
 
-    <!-- CARD 3: SOUND (MÚSICA CHELO) -->
-    <div class="agent-card card-sound" onclick="openPage('page-sound')">
-      <!-- TROQUE O URL ABAIXO PELA CAPA DA MÚSICA -->
-      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600');"></div>
-      <div class="card-overlay"></div>
-      <div class="card-content">
-        <span class="card-tag">03 // AUDIO</span>
-        <h2 class="card-title">SOUND VIBE</h2>
-        <p class="card-sub">CHELO TRACK</p>
-      </div>
+<!-- PÁGINA 4: FAITH -->
+<section id="page-faith" class="full-page">
+  <div class="page-container">
+    <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
+    <span class="page-badge">PRINCIPLES & CORE</span>
+    <h1 class="page-title">Faith</h1>
+    <blockquote class="verse-quote">
+      "O Senhor é a minha luz e a minha salvação; de quem terei medo?"
+    </blockquote>
+    <span class="verse-ref">— Salmos 27:1</span>
+    <div class="voice-controls">
+      <button onclick="speakVerse()" class="bat-btn">🔊 OUVIR NARRADOR NOVAMENTE</button>
     </div>
+  </div>
+</section>
 
-    <!-- CARD 4: FAITH (CRISTO / BÍBLIA) -->
-    <div class="agent-card card-faith" onclick="openPage('page-faith')">
-      <!-- TROQUE O URL ABAIXO PELA FOTO DA BÍBLIA/CRUZ -->
-      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544717305-2782549b5136?w=600');"></div>
-      <div class="card-overlay"></div>
-      <div class="card-content">
-        <span class="card-tag">04 // CORE</span>
-        <h2 class="card-title">FAITH</h2>
-        <p class="card-sub">SALMOS 27:1</p>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- ==================== PÁGINAS EM TELA CHEIA ==================== -->
-
-  <!-- PÁGINA 1: QUEM É NVNES -->
-  <section id="page-profile" class="full-page">
-    <div class="page-container">
-      <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
-      <span class="page-badge">SUBJECT // PEDRO NEVES</span>
-      <h1 class="page-title">Quem é Nvnes??</h1>
-      <p class="page-subtitle">São Paulo — BR | 011</p>
-      <div class="page-body">
-        <p>Desenvolvendo ideias, criando projetos e registrando a essência urbana sob a perspectiva noturna da cidade de São Paulo.</p>
-      </div>
-      <!-- LINK DO SEU INSTAGRAM DIRECTO -->
-      <a href="https://instagram.com/nunes17" target="_blank" class="bat-btn">ACESSAR INSTAGRAM ↗</a>
-    </div>
-  </section>
-
-  <!-- PÁGINA 2: SP GALLERY -->
-  <section id="page-gallery" class="full-page">
-    <div class="page-container">
-      <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
-      <span class="page-badge">VISUALS // SÃO PAULO</span>
-      <h1 class="page-title">SP Gallery 011</h1>
-      <div class="gallery-wrapper">
-        <img src="https://images.unsplash.com/photo-1578637387939-43c525550085?w=800" id="img-target" class="main-photo" alt="SP Photo">
-        <p id="caption-target" class="photo-caption">011 — Cidade de Pedra & Noite</p>
-        <div class="gallery-nav">
-          <button onclick="prevSlide()" class="bat-btn">❮ ANTERIOR</button>
-          <button onclick="nextSlide()" class="bat-btn">PRÓXIMA ❯</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PÁGINA 3: SOUND -->
-  <section id="page-sound" class="full-page">
-    <div class="page-container">
-      <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
-      <span class="page-badge">TRACK SELECTION</span>
-      <h1 class="page-title">Chelo — Cara de Personalidade</h1>
-      <div class="audio-card">
-        <p class="track-info">Ouça o trecho do som selecionado:</p>
-        <audio controls class="bat-player">
-          <source src="musica.mp3" type="audio/mpeg">
-          Seu navegador não suporta o player de áudio.
-        </audio>
-      </div>
-    </div>
-  </section>
-
-  <!-- PÁGINA 4: FAITH -->
-  <section id="page-faith" class="full-page">
-    <div class="page-container">
-      <button class="back-btn" onclick="closePages()">❮ VOLTAR AO MENU</button>
-      <span class="page-badge">PRINCIPLES & CORE</span>
-      <h1 class="page-title">Faith</h1>
-      <blockquote class="verse-quote">
-        "O Senhor é a minha luz e a minha salvação; de quem terei medo?"
-      </blockquote>
-      <span class="verse-ref">— Salmos 27:1</span>
-      <div class="voice-controls">
-        <button onclick="speakVerse()" class="bat-btn">🔊 OUVIR NARRADOR NOVAMENTE</button>
-      </div>
-    </div>
-  </section>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
