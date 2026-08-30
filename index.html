@@ -15,7 +15,7 @@
 <div id="intro-overlay" class="overlay">
   <div class="intro-box">
     <div class="box-header">
-      <span class="box-title"> WELCOME.TXT // WELCOME.TXT</span>
+      <span class="box-title">SYSTEM_INIT // WELCOME.TXT</span>
       <button class="close-btn" onclick="closeIntro()">[X]</button>
     </div>
     <div class="box-body terminal-text">
@@ -23,7 +23,7 @@
       <span id="typed-text"></span><span class="cursor">|</span>
     </div>
     <div class="box-footer">
-      <button id="close-intro-btn" class="bat-btn" onclick="closeIntro()" style="display: none;">[ PROSSEGUIR ]</button>
+      <button id="close-intro-btn" class="bat-btn" onclick="closeIntro()" style="display: none;">[ ACESSAR PAINEL ]</button>
     </div>
   </div>
 </div>
@@ -34,8 +34,116 @@
   <div class="system-status"><span class="blink">●</span> YOUR MOOD</div>
 </header>
 
-<!-- LOGO DO BATMAN NO FUNDO -->
-<div class="bat-wallpaper"></div>
+<!-- MAPA INTERATIVO DE FUNDO: PERSEGUIÇÃO PELA CIDADE -->
+<div class="city-map" id="city-map">
+  <svg id="map-svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
+
+    <defs>
+      <linearGradient id="streetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#062042" />
+        <stop offset="100%" stop-color="#4dd8ff" />
+      </linearGradient>
+    </defs>
+
+    <!-- Prédios ao fundo (skyline) -->
+    <g class="city-buildings">
+      <rect x="40"  y="440" width="55" height="160" />
+      <rect x="60"  y="440" width="8"  height="14" class="building-window" />
+      <rect x="60"  y="470" width="8"  height="14" class="building-window" />
+      <rect x="60"  y="500" width="8"  height="14" class="building-window" />
+
+      <rect x="120" y="480" width="45" height="120" />
+      <rect x="135" y="500" width="8" height="12" class="building-window" />
+      <rect x="135" y="525" width="8" height="12" class="building-window" />
+
+      <rect x="240" y="60"  width="55" height="200" />
+      <rect x="255" y="80"  width="8" height="12" class="building-window" />
+      <rect x="255" y="110" width="8" height="12" class="building-window" />
+      <rect x="255" y="140" width="8" height="12" class="building-window" />
+      <rect x="255" y="170" width="8" height="12" class="building-window" />
+
+      <rect x="440" y="30"  width="65" height="230" />
+      <rect x="460" y="55"  width="9" height="13" class="building-window" />
+      <rect x="460" y="90"  width="9" height="13" class="building-window" />
+      <rect x="460" y="125" width="9" height="13" class="building-window" />
+      <rect x="460" y="160" width="9" height="13" class="building-window" />
+
+      <rect x="620" y="420" width="70" height="180" />
+      <rect x="640" y="440" width="9" height="13" class="building-window" />
+      <rect x="640" y="470" width="9" height="13" class="building-window" />
+      <rect x="640" y="500" width="9" height="13" class="building-window" />
+
+      <rect x="720" y="460" width="50" height="140" />
+      <rect x="735" y="480" width="8" height="12" class="building-window" />
+      <rect x="735" y="510" width="8" height="12" class="building-window" />
+
+      <rect x="820" y="60"  width="60" height="200" />
+      <rect x="838" y="85"  width="9" height="13" class="building-window" />
+      <rect x="838" y="115" width="9" height="13" class="building-window" />
+      <rect x="838" y="145" width="9" height="13" class="building-window" />
+    </g>
+
+    <!-- Grade de ruas -->
+    <g class="map-grid">
+      <line x1="0" y1="100" x2="1000" y2="100" stroke="url(#streetGradient)" />
+      <line x1="0" y1="250" x2="1000" y2="250" stroke="url(#streetGradient)" />
+      <line x1="0" y1="400" x2="1000" y2="400" stroke="url(#streetGradient)" />
+      <line x1="0" y1="520" x2="1000" y2="520" stroke="url(#streetGradient)" />
+      <line x1="150" y1="0" x2="150" y2="600" stroke="url(#streetGradient)" />
+      <line x1="350" y1="0" x2="350" y2="600" stroke="url(#streetGradient)" />
+      <line x1="550" y1="0" x2="550" y2="600" stroke="url(#streetGradient)" />
+      <line x1="750" y1="0" x2="750" y2="600" stroke="url(#streetGradient)" />
+      <line x1="900" y1="0" x2="900" y2="600" stroke="url(#streetGradient)" />
+    </g>
+
+    <!-- Rota invisível que guia a perseguição -->
+    <path id="chasePath" d="M150,100 L750,100 L750,250 L350,250 L350,400 L900,400 L900,520 L150,520 Z" fill="none" />
+
+    <!-- Pontos fixos de "heróis" espalhados pela cidade -->
+    <circle class="hero-dot" cx="150" cy="250" r="6" />
+    <circle class="hero-dot" cx="550" cy="520" r="6" />
+    <circle class="hero-dot" cx="900" cy="100" r="6" />
+    <circle class="hero-dot" cx="350" cy="100" r="6" />
+
+    <!-- Molde circular reutilizado pelas imagens -->
+    <defs>
+      <clipPath id="circleClip">
+        <circle r="1" cx="0" cy="0" />
+      </clipPath>
+    </defs>
+
+    <!-- O "vilão" fugindo pela rota -->
+    <g class="villain-icon">
+      <!-- TROQUE 'coringa.jpeg' PELO NOME DA SUA IMAGEM -->
+      <image href="coringa.jpeg" x="-18" y="-18" width="36" height="36" clip-path="circle(18px at center)" />
+      <circle r="18" class="icon-ring villain-ring" />
+      <animateMotion dur="14s" repeatCount="indefinite" rotate="auto">
+        <mpath href="#chasePath" />
+      </animateMotion>
+    </g>
+
+    <!-- O "herói" perseguindo, um pouco atrás -->
+    <g class="hero-icon">
+      <!-- TROQUE 'batman.jpeg' PELO NOME DA SUA IMAGEM -->
+      <image href="batman.jpeg" x="-20" y="-20" width="40" height="40" clip-path="circle(20px at center)" />
+      <circle r="20" class="icon-ring hero-ring" />
+      <animateMotion dur="14s" repeatCount="indefinite" rotate="auto" begin="-1.2s">
+        <mpath href="#chasePath" />
+      </animateMotion>
+    </g>
+
+    <!-- O "parceiro" (Robin) correndo logo atrás do herói -->
+    <g class="sidekick-icon">
+      <!-- TROQUE 'robin.jpeg' PELO NOME DA SUA IMAGEM -->
+      <image href="robin.jpeg" x="-15" y="-15" width="30" height="30" clip-path="circle(15px at center)" />
+      <circle r="15" class="icon-ring sidekick-ring" />
+      <animateMotion dur="14s" repeatCount="indefinite" rotate="auto" begin="-2.4s">
+        <mpath href="#chasePath" />
+      </animateMotion>
+    </g>
+
+  </svg>
+</div>
 
 <!-- MENU PRINCIPAL: CARDS EM DIAGONAL (ESTILO VALORANT / R6) -->
 <main id="main-selection" class="selection-grid">
@@ -45,7 +153,7 @@
     <div class="card-img" style="background-image: url('capaNv.jpeg');"></div>
     <div class="card-overlay"></div>
     <div class="card-content">
-      <span class="card-tag">777 // That's me</span>
+      <span class="card-tag">01 // SUBJECT</span>
       <h2 class="card-title">QUEM É NVNES</h2>
       <p class="card-sub">PROFILE & BIO</p>
     </div>
@@ -53,13 +161,13 @@
 
   <!-- CARD 2: SP GALLERY (DESTAQUES SP) -->
   <div class="agent-card card-gallery" onclick="openPage('page-gallery')">
-    <!-- TROQUE 'fotos/capa-sp.jpeg' PELO NOME DA SUA FOTO -->
-    <div class="card-img" style="background-image: url('Sp.jpeg');"></div>
+    <!-- TROQUE 'capaSp.jpeg' PELO NOME DA SUA FOTO -->
+    <div class="card-img" style="background-image: url('capaSp.jpeg');"></div>
     <div class="card-overlay"></div>
     <div class="card-content">
-      <span class="card-tag">777 // PHOTOS</span>
-      <h2 class="card-title"> GALLERY MOMENTS</h2>
-      <p class="card-sub"> 011</p>
+      <span class="card-tag">02 // PHOTOS</span>
+      <h2 class="card-title">SP GALLERY</h2>
+      <p class="card-sub">URBAN VISUALS 011</p>
     </div>
   </div>
 
@@ -70,7 +178,7 @@
     <div class="card-content">
       <span class="card-tag">03 // AUDIO</span>
       <h2 class="card-title">SOUND VIBE</h2>
-      <p class="card-sub"=TRACKS</p>
+      <p class="card-sub">CHELO TRACK</p>
     </div>
   </div>
 
@@ -82,6 +190,18 @@
       <span class="card-tag">04 // CORE</span>
       <h2 class="card-title">FAITH</h2>
       <p class="card-sub">SALMOS 27:1</p>
+    </div>
+  </div>
+
+  <!-- CARD 5: INSTAGRAM (LINK DIRETO EXTERNO) -->
+  <div class="agent-card card-instagram" onclick="window.open('https://instagram.com/nunes17', '_blank')">
+    <!-- TROQUE 'capaInsta.jpeg' PELA SUA FOTO DE CAPA DO INSTAGRAM -->
+    <div class="card-img" style="background-image: url('capaInsta.jpeg');"></div>
+    <div class="card-overlay"></div>
+    <div class="card-content">
+      <span class="card-tag">05 // SOCIAL</span>
+      <h2 class="card-title">INSTAGRAM</h2>
+      <p class="card-sub">@NUNES17 ↗</p>
     </div>
   </div>
 
@@ -99,8 +219,6 @@
     <div class="page-body">
       <p>Desenvolvendo ideias, criando projetos e registrando a essência urbana sob a perspectiva noturna da cidade de São Paulo.</p>
     </div>
-    <!-- LINK DO SEU INSTAGRAM DIRECTO -->
-    <a href="https://instagram.com/nunes17" target="_blank" class="bat-btn">ACESSAR INSTAGRAM ↗</a>
   </div>
 </section>
 
@@ -114,8 +232,8 @@
     <div class="gallery-wrapper">
       <!-- FRAME COM EFEITO GLITCH NA TROCA DE FOTO -->
       <div class="photo-frame" id="photo-frame">
-        <!-- TROQUE 'fotos/sp-01.jpeg' PELA SUA PRIMEIRA FOTO -->
-        <img src="fotos/sp-01.jpeg" id="img-target" class="main-photo" alt="SP Photo">
+        <!-- TROQUE 'sp1.jpeg' PELA SUA PRIMEIRA FOTO -->
+        <img src="sp1.jpeg" id="img-target" class="main-photo" alt="SP Photo">
         <div class="scan-line"></div>
       </div>
       <p id="caption-target" class="photo-caption">011 — Cidade de Pedra & Noite</p>
