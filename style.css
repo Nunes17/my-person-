@@ -99,58 +99,78 @@ body {
 .blink { animation: blinker 1s infinite; color: #ffbf00; margin-right: 4px; }
 @keyframes blinker { 50% { opacity: 0; } }
 
-/* MAPA INTERATIVO DE FUNDO */
+/* MAPA INTERATIVO DE FUNDO - ESTILO SPIDER-MAN HUD */
 .city-map {
   position: fixed;
   inset: 0;
   z-index: 1;
-  opacity: 0.35;
-  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s;
+  opacity: 0.45;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s;
   pointer-events: none;
+  background: radial-gradient(circle at center, rgba(0, 240, 255, 0.05) 0%, rgba(6, 6, 8, 0.8) 100%);
 }
 
 #map-svg { width: 100%; height: 100%; }
 
-.map-grid line {
-  stroke-opacity: 0.4;
-  stroke-width: 1.5;
+/* LINHAS DE RUA FLUIDAS E SUAVES */
+.map-grid line,
+.map-grid path {
+  stroke: #00f0ff;
+  stroke-opacity: 0.35;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.4));
+  animation: roadPulse 6s ease-in-out infinite alternate;
 }
 
-.city-buildings rect {
-  fill: #0a1a35;
-  stroke: #1c3a63;
-  stroke-width: 1;
+@keyframes roadPulse {
+  0% { stroke-opacity: 0.25; filter: drop-shadow(0 0 2px rgba(0, 240, 255, 0.2)); }
+  100% { stroke-opacity: 0.55; filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.6)); }
+}
+
+/* PRÉDIOS EM BLOCOS VIBRANTES ESTILO MINIMAPA DO HOMEM-ARANHA */
+.city-buildings rect,
+.city-buildings polygon {
+  fill: #0c182b;
+  stroke: #00f0ff;
+  stroke-width: 1.2;
+  stroke-opacity: 0.5;
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.7));
 }
 
 .city-buildings .building-window {
-  fill: #4dd8ff;
+  fill: #ffbf00;
   stroke: none;
-  opacity: 0.6;
-  animation: windowFlicker 4s infinite ease-in-out;
+  opacity: 0.7;
+  animation: spiderSenseGlow 3s infinite ease-in-out;
 }
 
 .city-buildings .building-window:nth-child(odd) {
-  animation-delay: 1.3s;
+  fill: #00f0ff;
+  animation-delay: 1s;
 }
 
 .city-buildings .building-window:nth-child(3n) {
-  animation-delay: 2.6s;
+  fill: #ff0055;
+  animation-delay: 2s;
 }
 
-@keyframes windowFlicker {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
+@keyframes spiderSenseGlow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
 }
 
 .hero-dot {
   fill: #ffbf00;
-  filter: drop-shadow(0 0 6px #ffbf00);
+  filter: drop-shadow(0 0 10px #ffbf00);
   animation: pulseDot 2s infinite ease-in-out;
 }
 
 @keyframes pulseDot {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
 .villain-icon image,
@@ -179,22 +199,22 @@ body {
   filter: drop-shadow(0 0 8px #ffbf00);
 }
 
-/* Quando passa o mouse num card, o mapa dá um "zoom" na direção dele */
-.city-map.zoomed { opacity: 0.55; }
-.city-map.zoom-1 { transform: scale(1.4) translate(-10%, -10%); }
-.city-map.zoom-2 { transform: scale(1.4) translate(5%, -8%); }
-.city-map.zoom-3 { transform: scale(1.4) translate(-5%, 8%); }
-.city-map.zoom-4 { transform: scale(1.4) translate(10%, 5%); }
-.city-map.zoom-5 { transform: scale(1.4) translate(0%, 0%); }
+/* ZOOM SUAVE DO MAPA */
+.city-map.zoomed { opacity: 0.65; }
+.city-map.zoom-1 { transform: scale(1.35) translate(-8%, -8%); }
+.city-map.zoom-2 { transform: scale(1.35) translate(4%, -6%); }
+.city-map.zoom-3 { transform: scale(1.35) translate(-4%, 6%); }
+.city-map.zoom-4 { transform: scale(1.35) translate(8%, 4%); }
+.city-map.zoom-5 { transform: scale(1.35) translate(0%, 0%); }
 
-/* SELEÇÃO EM FORMATO ZIGUE-ZAGUE ("W") */
+/* SELEÇÃO EM FORMATO ZIGUE-ZAGUE ("W") COM SOBREPOSIÇÃO */
 .selection-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: center;
   gap: 0;
-  padding: 110px 30px 40px;
+  padding: 80px 20px 40px;
   min-height: calc(100vh - 40px);
   position: relative;
   z-index: 2;
@@ -202,30 +222,43 @@ body {
 
 .agent-card {
   flex: 0 0 auto;
-  width: 200px;
-  height: 200px;
+  width: 280px;
+  height: 280px;
   background: #101015;
-  border: 1px solid #1f1f2a;
-  border-radius: 6px;
+  border: 1.5px solid #1f1f2a;
+  border-radius: 8px;
   position: relative;
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s, border-color 0.4s;
   animation: floatCard 4.5s ease-in-out infinite;
-  margin: 0 -1px;
+  
+  /* MARGEM NEGATIVA PARA SOBREPOR OS CARDS */
+  margin-left: -35px;
+  margin-right: -35px;
+  
+  /* SOMBRA PARA DAR PROFUNDIDADE DE CAMADAS */
+  box-shadow: -10px 10px 25px rgba(0, 0, 0, 0.8);
 }
 
-/* CARDS PARES (2º e 4º) - DESCEM PARA FORMAR A PARTE DE BAIXO DO "W" */
+/* CAMADAS DE Z-INDEX PARA CRIAR ORDEM DE SOBREPOSIÇÃO */
+.agent-card:nth-child(1) { z-index: 1; }
+.agent-card:nth-child(2) { z-index: 2; }
+.agent-card:nth-child(3) { z-index: 3; }
+.agent-card:nth-child(4) { z-index: 2; }
+.agent-card:nth-child(5) { z-index: 1; }
+
+/* CARDS PARES (2º e 4º) - DESCEM PARA FORMAR O "W" AJUSTADO */
 .agent-card:nth-child(even) {
-  margin-top: 100px;
+  margin-top: 140px;
 }
 
-/* CARDS ÍMPARES (1º, 3º e 5º) - FICAM NO TOPO DO "W" */
+/* CARDS ÍMPARES (1º, 3º e 5º) - FICAM NO TOPO */
 .agent-card:nth-child(odd) {
   margin-top: 0;
 }
 
-/* delay diferente pra cada card não flutuar em sincronia */
+/* DELAYS DE FLUTUAÇÃO */
 .agent-card:nth-child(1) { animation-delay: 0s; }
 .agent-card:nth-child(2) { animation-delay: 0.7s; }
 .agent-card:nth-child(3) { animation-delay: 1.4s; }
@@ -237,60 +270,71 @@ body {
   50% { transform: translateY(-14px); }
 }
 
+/* QUANDO PASSA O MOUSE, O CARD FICA NA FRENTE DE TODOS */
 .agent-card:hover {
   animation-play-state: paused;
-  transform: translateY(-26px) scale(1.07);
+  transform: translateY(-20px) scale(1.08);
   border-color: #00f0ff;
-  box-shadow: 0 25px 45px rgba(0, 240, 255, 0.35);
-  z-index: 50;
+  box-shadow: 0 25px 50px rgba(0, 240, 255, 0.5);
+  z-index: 100 !important;
 }
 
+/* IMAGEM INTERNA DOS CARDS COM MOVIMENTO/CORRIDA CONTINUA */
 .card-img {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: -10%; left: -10%; width: 120%; height: 120%;
   background-size: cover;
   background-position: center;
-  filter: grayscale(100%) contrast(120%);
-  transition: all 0.4s;
+  filter: grayscale(80%) contrast(120%);
+  transition: filter 0.4s;
+  animation: imageRun 12s ease-in-out infinite alternate;
+}
+
+@keyframes imageRun {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.1) translate(-2%, -3%); }
+  100% { transform: scale(1.05) translate(2%, 1%); }
 }
 
 .agent-card:hover .card-img {
-  filter: grayscale(20%) contrast(110%);
-  transform: scale(1.08);
+  filter: grayscale(10%) contrast(115%);
+  animation-play-state: paused;
+  transform: scale(1.12);
 }
 
 .card-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(180deg, rgba(0,240,255,0.05) 0%, rgba(0,0,0,0.95) 100%);
+  background: linear-gradient(180deg, rgba(0,240,255,0.02) 0%, rgba(6,6,8,0.92) 100%);
 }
 
 .card-content {
   position: absolute;
-  bottom: 18px;
-  left: 16px;
-  right: 16px;
+  bottom: 22px;
+  left: 20px;
+  right: 20px;
   z-index: 2;
 }
 
 .card-tag {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: 10px;
   color: #ffbf00;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
 }
 
 .card-title {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 800;
   color: #fff;
   line-height: 1.15;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
-.card-sub { font-size: 9px; color: #777; font-family: 'JetBrains Mono', monospace; }
+.card-sub { font-size: 10px; color: #888; font-family: 'JetBrains Mono', monospace; }
 
 /* SCAN-LINE NOS CARDS DO MENU (HOVER) */
 .agent-card::after {
@@ -299,7 +343,7 @@ body {
   left: 0;
   top: -20%;
   width: 100%;
-  height: 3px;
+  height: 4px;
   background: linear-gradient(180deg, transparent, #00f0ff, transparent);
   opacity: 0;
   pointer-events: none;
@@ -317,7 +361,7 @@ body {
   100% { top: 110%; opacity: 0; }
 }
 
-/* leve tremor de glitch no título ao passar o mouse */
+/* TREMOR DE GLITCH NO TÍTULO AO PASSAR O MOUSE */
 .agent-card:hover .card-title {
   animation: titleGlitch 0.3s steps(2, end) 1;
 }
