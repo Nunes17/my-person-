@@ -187,13 +187,13 @@ body {
 .city-map.zoom-4 { transform: scale(1.4) translate(10%, 5%); }
 .city-map.zoom-5 { transform: scale(1.4) translate(0%, 0%); }
 
-/* CARDS EM DIAGONAL (ESTILO VALORANT / R6) */
+/* SELEÇÃO EM FORMATO ZIGUE-ZAGUE ("W") */
 .selection-grid {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-  gap: 24px;
+  gap: 0;
   padding: 110px 30px 40px;
   min-height: calc(100vh - 40px);
   position: relative;
@@ -212,11 +212,17 @@ body {
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s, border-color 0.4s;
   animation: floatCard 4.5s ease-in-out infinite;
+  margin: 0 -1px;
 }
 
-/* zigue-zague: cards pares descem um pouco */
+/* CARDS PARES (2º e 4º) - DESCEM PARA FORMAR A PARTE DE BAIXO DO "W" */
 .agent-card:nth-child(even) {
-  margin-top: 90px;
+  margin-top: 100px;
+}
+
+/* CARDS ÍMPARES (1º, 3º e 5º) - FICAM NO TOPO DO "W" */
+.agent-card:nth-child(odd) {
+  margin-top: 0;
 }
 
 /* delay diferente pra cada card não flutuar em sincronia */
